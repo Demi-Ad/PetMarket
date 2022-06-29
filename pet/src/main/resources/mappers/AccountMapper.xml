@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kiti.buy.pmk.mapper.AccountMapper">
+
+	<insert id="register" parameterType="account" useGeneratedKeys="true" keyProperty="accountSeq">
+		INSERT INTO account (account_id, account_password, account_email, account_location, account_profile_path, account_questions, account_answer)
+		VALUES (#{accountId}, #{accountPassword}, #{accountEmail}, #{accountLocation, jdbcType=VARCHAR}, #{accountProfilePath}, #{accountQuestions}, #{accountAnswer} )
+	</insert>
+	
+	<select id="idInUse" parameterType="string" resultType="integer">
+		SELECT COUNT(1) AS result from account WHERE account_id = #{value}
+	</select>
+	
+	<select id="emailInUse" parameterType="string" resultType="integer">
+		SELECT COUNT(1) AS result from account WHERE account_email = #{value}
+	</select>
+	
+	<select id="findByAccountId" parameterType="string" resultType="account">
+		select * from account where account_id = #{value}
+	</select>
+	
+</mapper>
