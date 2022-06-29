@@ -42,7 +42,7 @@ public class MultipartImageUploadComponent {
 		}
 	}
 
-	public String saveImage(MultipartFile multipartFile, SaveType saveType) {
+	public String saveImageAndGetPath(MultipartFile multipartFile, SaveType saveType) {
 		
 		if (multipartFile == null || multipartFile.isEmpty()) {
 			return null;

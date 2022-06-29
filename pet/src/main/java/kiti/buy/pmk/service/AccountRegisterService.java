@@ -28,7 +28,7 @@ public class AccountRegisterService {
 	
 	public void register(AccountRegisterDto dto) {
 		String accountId = dto.getAccountId();
-		String profilePath =  multipartImageUploadComponent.saveImage(dto.getUploadImage(), SaveType.PROFILE);
+		String profilePath =  multipartImageUploadComponent.saveImageAndGetPath(dto.getUploadImage(), SaveType.PROFILE);
 		String encryptPassword = encryptPasswordComponent.encryptPassword(dto.getAccountPassword());
 		
 		AccountVO account = AccountVO.builder()

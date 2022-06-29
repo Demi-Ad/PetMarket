@@ -26,7 +26,7 @@ public class MultipartImageUploadComponentTest {
 	public void uploadTest() throws IOException {
 		MockMultipartFile mock = getMockMultipartFile("333333", "png", "src/main/webapp/resources/333333.png");
 		
-		String path = multipartImageUploadComponent.saveImage(mock, SaveType.PROFILE);
+		String path = multipartImageUploadComponent.saveImageAndGetPath(mock, SaveType.PROFILE);
 		System.out.println(path);
 		Assert.assertNotNull(path);
 	
