@@ -23,6 +23,8 @@
 
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
+	<beans:bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+
 	<context:component-scan base-package="kiti.buy.pmk.controller" />
 	<context:component-scan base-package="kiti.buy.pmk.advice"/>
 	<context:component-scan base-package="kiti.buy.pmk.config"/>
