@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
-<html>
+<html class="h-100">
 <c:import url="include/head.jsp">
 	<c:param name="title" value="index"/>
 </c:import>
-<body>
-<h1>
-	Hello world!  
-</h1>
-<P>  The time on the server is ${model}. </P>
+<body class="d-flex flex-column h-100">
+<c:import url="include/header.jsp"/>
+<main class="flex-shrink-0">
+	<div class="container">
+		<h1>
+			Hello world!
+		</h1>
+		<P>  The time on the server is ${model}. </P>
+	</div>
+</main>
+<c:import url="include/footer.jsp"/>
 </body>
 </html>
