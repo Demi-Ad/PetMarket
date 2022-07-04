@@ -14,18 +14,18 @@ public class PostVO {
 	private int postSeq;
 	private String postTitle;
 	private String postContent;
-	private LocalDate createdDate;
+	private LocalDate postCreatedDate;
 	private int postHit;
 	private int postCategory;
 	private int postAuthor;
 	
 	
 	@Builder
-	public PostVO(String postTitle, String postContent, LocalDate createdDate, int postCategory, int postAuthor) {
+	public PostVO(String postTitle, String postContent, int postCategory, int postAuthor) {
 		
 		this.postTitle = postTitle;
 		this.postContent = postContent;
-		this.createdDate = createdDate;
+		this.postCreatedDate = LocalDate.now();
 		this.postCategory = postCategory;
 		this.postAuthor = postAuthor;
 		this.postHit = 0;
