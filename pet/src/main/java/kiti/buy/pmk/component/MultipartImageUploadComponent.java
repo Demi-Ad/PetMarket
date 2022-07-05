@@ -1,15 +1,15 @@
 package kiti.buy.pmk.component;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
-import javax.annotation.PostConstruct;
-
+import kiti.buy.pmk.exception.MultipartImageUploadException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import kiti.buy.pmk.exception.MultipartImageUploadException;
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * 
@@ -18,24 +18,28 @@ import kiti.buy.pmk.exception.MultipartImageUploadException;
  * @version 1.0
  */
 @Component
+@RequiredArgsConstructor
 public class MultipartImageUploadComponent {
 
-	private static final String PROFILE_PATH = "D:\\team_upload\\profile";
-	private static final String POST_PATH = "D:\\team_upload\\post";
-	
+	private static final String PROFILE_PATH = "resources/upload/profile";
+	private static final String POST_PATH = "resources/upload/post";
+
+	private final ServletContext context;
+
 	@PostConstruct
 	public void init() {
-		File root = new File("D:\\team_upload");
-		
+		String realPath = context.getRealPath("resources/upload");
+		File root = new File(realPath);
+		System.out.println(realPath);
 		if (!root.exists()) {
 			root.mkdir();
 		}
 		
-		File profileFolder = new File(PROFILE_PATH);
+		File profileFolder = new File(realPath, "profile");
 		if (!profileFolder.exists()) {
 			profileFolder.mkdir();
 		}
-		File postFolder = new File(POST_PATH);
+		File postFolder = new File(realPath, "post");
 		
 		if (!postFolder.exists()) {
 			postFolder.mkdir();
@@ -58,12 +62,12 @@ public class MultipartImageUploadComponent {
 			StringBuilder sb = new StringBuilder();
 			switch (saveType) {
 			case PROFILE:
-				imagePath = PROFILE_PATH + "\\" + uuid + extention;
+				imagePath = context.getRealPath(PROFILE_PATH) + "\\" + uuid + extention;
 				file = new File(imagePath);
 				sb.append("profile/").append(uuid).append(extention);
 				break;
 			case POST:
-				imagePath = POST_PATH + "\\" + uuid + extention;
+				imagePath = context.getRealPath(POST_PATH) + "\\" + uuid + extention;
 				file = new File(imagePath);
 				sb.append("post/").append(uuid).append(extention);
 				break;
