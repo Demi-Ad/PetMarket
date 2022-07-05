@@ -5,7 +5,7 @@
 
 	<insert id="register" parameterType="account" useGeneratedKeys="true" keyProperty="accountSeq">
 		INSERT INTO account (account_id, account_password, account_email, account_location, account_profile_path, account_questions, account_answer)
-		VALUES (#{accountId}, #{accountPassword}, #{accountEmail}, #{accountLocation, jdbcType=VARCHAR}, #{accountProfilePath}, #{accountQuestions}, #{accountAnswer} )
+		VALUES (#{accountId}, #{accountPassword}, #{accountEmail}, #{accountLocation}, #{accountProfilePath, jdbcType=VARCHAR}, #{accountQuestions}, #{accountAnswer} )
 	</insert>
 	
 	<select id="idInUse" parameterType="string" resultType="integer">
