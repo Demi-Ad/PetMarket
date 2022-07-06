@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class AccountDuplicateCheckController {
 
 
     @GetMapping("/id")
-    public HttpEntity<DuplicateCheckResult> duplicateIdCheck(@RequestParam @Size(min = 3, max = 20, message = "아이디는 3글자 이상 20글자 이하입니다") String value) {
+    public HttpEntity<DuplicateCheckResult> duplicateIdCheck(@RequestParam @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$",message = "아이디는 영문 대소문자 + 숫자 3글자 이상 20글자 이하여야 합니다") String value) {
         DuplicateCheckResult result = new DuplicateCheckResult();
 
         boolean check = accountRegisterService.duplicateIdCheck(value);
@@ -37,7 +36,7 @@ public class AccountDuplicateCheckController {
     }
 
     @GetMapping("/email")
-    public HttpEntity<DuplicateCheckResult> duplicateEmailCheck(@RequestParam @Email(message = "이메일 형식이 아닙니다") String value) {
+    public HttpEntity<DuplicateCheckResult> duplicateEmailCheck(@RequestParam @Email(message = "이메일 형식이 아닙니다") @NotEmpty String value) {
         DuplicateCheckResult result = new DuplicateCheckResult();
 
         boolean check = accountRegisterService.duplicateEmailCheck(value);

@@ -1,19 +1,19 @@
 package kiti.buy.pmk.mapper;
 
 
-
+import kiti.buy.pmk.vo.AccountVO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import kiti.buy.pmk.vo.AccountVO;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*.xml")
+@WebAppConfiguration
 @Transactional
 public class AccountMapperTest {
 	
