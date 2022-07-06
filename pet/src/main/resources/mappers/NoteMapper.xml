@@ -4,7 +4,7 @@
 <mapper namespace="kiti.buy.pmk.mapper.NoteMapper">
 	<insert id="writeNote" parameterType="kiti.buy.pmk.vo.NoteVO" useGeneratedKeys="true" keyProperty="noteSeq">
 	INSERT INTO note(note_sender, note_recipient, note_title, note_content)
-		values (#{noteSender},#{noteRecipient},#{noteTitle}, #{noteContent})
+	values (#{noteSender},#{noteRecipient},#{noteTitle}, #{noteContent})
 	</insert>
 	
 </mapper>
