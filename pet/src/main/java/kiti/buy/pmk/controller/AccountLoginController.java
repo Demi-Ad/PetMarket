@@ -35,4 +35,10 @@ public class AccountLoginController {
         session.setAttribute("sessionDetail",sessionDetail);
         return "redirect:/";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }

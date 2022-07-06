@@ -19,5 +19,13 @@
 	<select id="findByAccountId" parameterType="string" resultType="account">
 		select * from account where account_id = #{value}
 	</select>
-	
+
+	<select id="findByAccountEmail" parameterType="string" resultType="account">
+		select  * from account where account_email = #{value}
+	</select>
+
+	<update id="changePassword" parameterType="hashmap">
+		update account set account_password = #{password} where account_id = #{accountId}
+	</update>
+
 </mapper>
