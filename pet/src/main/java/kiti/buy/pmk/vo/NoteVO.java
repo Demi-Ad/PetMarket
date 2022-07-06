@@ -1,11 +1,11 @@
 package kiti.buy.pmk.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class NoteVO {
 	
@@ -15,7 +15,7 @@ public class NoteVO {
 	private String noteTitle;
 	private String noteContent;
 	
-	
+	@Builder
 	public NoteVO(int noteSender, int noteRecipient, String noteTitle, String noteContent) {
 		this.noteSender = noteSender;
 		this.noteRecipient = noteRecipient;
