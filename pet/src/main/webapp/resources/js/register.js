@@ -66,6 +66,6 @@ submitBtn.addEventListener("click", evt => {
             document.forms["form"].submit();
         }
     } else {
-        alert("��й�ȣ�� 3���� �̻� 20���� ���Ͽ��� �մϴ�")
+        alert("비밀번호는 3글자 이상 20글자 이하여야 합니다")
     }
 })

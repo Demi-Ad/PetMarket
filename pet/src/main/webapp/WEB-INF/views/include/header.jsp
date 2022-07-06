@@ -20,9 +20,18 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <div class="row">
-                    <p class="mb-0 col-3"><c:out value="${sessionScope.sessionDetail.accountId}"/></p>
-                    <img src="<c:out value="${sessionScope.sessionDetail.profilePath}"/>" class="col-6" alt="img" style="border-radius: 50%; width: 30px" >
+                <div class="d-flex">
+                    <a class="btn btn-outline-info" href="<c:url value="/logout"/>">logout</a>
+                    <p class="m-0 ms-3 me-3 btn btn-outline-success"><c:out value="${sessionScope.sessionDetail.accountId}"/></p>
+                    <c:choose>
+                        <c:when test="${sessionScope.sessionDetail.profilePath eq not null}">
+                            <img src="<c:out value="${sessionScope.sessionDetail.profilePath}"/>" alt="img" style="border-radius: 50%; width: 40px; height: 38px" >
+                        </c:when>
+                        <c:otherwise>
+                            <img src="<c:url value="/resources/person.png"/>" alt="img" style="border-radius: 50%; width: 40px; height: 38px" >
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </c:otherwise>
         </c:choose>
