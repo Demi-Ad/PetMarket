@@ -46,6 +46,7 @@ public class AccountForgotController {
         switch (match) {
             case MATCH: {
                 String tempPassword = accountForgotService.generateTempPassword(dto.getAccountId());
+
                 return ResponseEntity.ok(Map.of("tempPassword", tempPassword));
             }
             case NOT_FOUND_ID:

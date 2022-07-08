@@ -29,5 +29,6 @@
 
 </main>
 <c:import url="include/footer.jsp"/>
+<script src="<c:url value="/resources/js/login.js"/>"></script>
 </body>
 </html>
