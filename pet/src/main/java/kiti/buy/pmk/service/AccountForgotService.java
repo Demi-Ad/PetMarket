@@ -31,8 +31,9 @@ public class AccountForgotService {
     public String generateTempPassword(String accountId) {
         String generate = tempPasswordGenerate();
         HashMap<String,String> param = new HashMap<>();
-        param.put("password",generate);
         param.put("accountId",accountId);
+        String encryptPassword = encryptPasswordComponent.encryptPassword(generate);
+        param.put("password",encryptPassword);
         accountMapper.changePassword(param);
         return generate;
     }

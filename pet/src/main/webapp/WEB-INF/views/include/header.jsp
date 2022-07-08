@@ -6,13 +6,10 @@
             <img src="<c:url value="/resources/194279.png"/>" alt="icon" style="width: 50px"/>
         </a>
 
-        <ul class="nav mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
-        </ul>
+        <div>
+            <h3 class="mb-0">동물 무료 분양 사무소</h3>
+        </div>
+
         <c:choose>
             <c:when test="${sessionScope.sessionDetail eq null}">
                 <div class="text-end">
@@ -35,6 +32,5 @@
                 </div>
             </c:otherwise>
         </c:choose>
-
     </div>
 </header>
