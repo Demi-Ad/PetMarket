@@ -6,4 +6,9 @@
 		INSERT INTO post(post_title, post_content, post_created_date, post_hit, post_category, post_author)
 		values (#{postTitle}, #{postContent}, #{postCreatedDate}, #{postHit}, #{postCategory}, #{postAuthor})
 	</insert>
+	
+	<select id="findAll" resultType="kiti.buy.pmk.vo.PostVO">
+		SELECT * from post
+	</select>
+
 </mapper>
