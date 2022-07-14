@@ -3,8 +3,8 @@
 
 <mapper namespace="kiti.buy.pmk.mapper.PostMapper">
 	<insert id="writePost" parameterType="kiti.buy.pmk.vo.PostVO" useGeneratedKeys="true" keyProperty="postSeq">
-		INSERT INTO post(post_title, post_content, post_created_date, post_hit, post_category, post_author)
-		values (#{postTitle}, #{postContent}, #{postCreatedDate}, #{postHit}, #{postCategory}, #{postAuthor})
+		INSERT INTO post(post_title, post_content, post_created_date, post_hit, post_category, post_author, post_img_path)
+		values (#{postTitle}, #{postContent}, #{postCreatedDate}, #{postHit}, #{postCategory}, #{postAuthor}, #{postImgPath})
 	</insert>
 	
 	<select id="findAll" resultType="kiti.buy.pmk.vo.PostVO">
