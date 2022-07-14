@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/register")
+//@RequestMapping("/register/*")
 @RequiredArgsConstructor
 @Slf4j
 public class AccountRegisterController {
 
     private final AccountRegisterService accountRegisterService;
 
-    @GetMapping
+    @GetMapping("/register")
     public String registerForm() {
         return "register";
     }

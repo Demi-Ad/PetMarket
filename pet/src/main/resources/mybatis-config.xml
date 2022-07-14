@@ -10,6 +10,7 @@
 	
 	<typeAliases>
 		<typeAlias type="kiti.buy.pmk.vo.AccountVO" alias="account"/>
+		<typeAlias type="kiti.buy.pmk.vo.AdminVO" alias="admin"/>
 	</typeAliases>
 	
 </configuration>
