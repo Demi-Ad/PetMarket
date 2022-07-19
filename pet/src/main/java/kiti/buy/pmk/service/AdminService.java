@@ -1,47 +1,41 @@
 package kiti.buy.pmk.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import kiti.buy.pmk.dao.AdminMemberDAO;
 import kiti.buy.pmk.dto.admin.AdminLoginDTO;
-import kiti.buy.pmk.dto.admin.AdminMemberDTO;
 import kiti.buy.pmk.mapper.AdminMapper;
 import kiti.buy.pmk.vo.AccountVO;
 import kiti.buy.pmk.vo.AdminVO;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class AdminService {
 	
-	private AdminMapper adminMapper;
+	private final AdminMapper adminMapper;
+	private final AdminMemberDAO AdminMemberDAO;
 	
 	
-	@Autowired
-	public AdminService(AdminMapper adminMapper) {
-		this.adminMapper = adminMapper;
-	}
-
-
-
 	public AdminVO login(AdminLoginDTO dto) {
-		
 		return adminMapper.adminLogin(dto);
-		
 	}
 	
-	
-	
-	
-	
-	public void adminMemberOut(AdminMemberDTO dto) throws Exception{
-		
+	public void deleteAccount(int accountSeq) {
+		AdminMemberDAO.adminMemberOutCheck(accountSeq);
 	}
-
-
+	
+	public List<AccountVO> findAllAccount() {
+		return AdminMemberDAO.findAll();
+	}
 }
 
 

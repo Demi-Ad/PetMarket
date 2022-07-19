@@ -27,5 +27,13 @@
 	<update id="changePassword" parameterType="hashmap">
 		update account set account_password = #{password} where account_id = #{accountId}
 	</update>
+	
+	<delete id="deleteBySeq" parameterType="int">
+		delete from account where account_seq = #{accountSeq}
+	</delete>
+	
+	<select id="findAll" resultType="account">
+		select * from account
+	</select>
 
 </mapper>
