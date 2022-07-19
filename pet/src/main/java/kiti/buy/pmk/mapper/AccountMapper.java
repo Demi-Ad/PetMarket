@@ -19,4 +19,6 @@ public interface AccountMapper {
 	AccountVO findByAccountEmail(String email);
 
 	void changePassword(HashMap<String,String> param);
+
+	void changeProfile(HashMap<String,String> param);
 }

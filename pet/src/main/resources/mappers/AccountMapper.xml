@@ -28,4 +28,8 @@
 		update account set account_password = #{password} where account_id = #{accountId}
 	</update>
 
+	<update id="changeProfile" parameterType="hashmap">
+		update account set account_profile_path = #{profile} where account_id = #{accountId}
+	</update>
+
 </mapper>
