@@ -1,12 +1,13 @@
 package kiti.buy.pmk.controller;
 
+import kiti.buy.pmk.controller.validatior.ChangePasswordValidator;
+import kiti.buy.pmk.dto.account.AccountChangePasswordDto;
 import kiti.buy.pmk.service.AccountInfoChangeService;
 import kiti.buy.pmk.vo.SessionDetail;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +28,14 @@ public class AccountInfoChangeController {
 
 
     @PostMapping("/account/change/password")
-    public String passwordChange(@SessionAttribute(name = "sessionDetail") SessionDetail account, @ModelAttribute ChangePasswordDto changePasswordDto) {
-
-        return "";
+    public String passwordChange(@SessionAttribute(name = "sessionDetail") SessionDetail account, @ModelAttribute AccountChangePasswordDto passwordDto, BindingResult bindingResult) {
+        new ChangePasswordValidator().validate(passwordDto,bindingResult);
+        if (bindingResult.hasErrors()) {
+            log.info("validation Fail = {}",bindingResult);
+            return "redirect:/account/change";
+        }
+        accountInfoChangeService.changeAccountPassword(passwordDto.getPassword(),account);
+        return "redirect:/logout";
     }
 
     @PostMapping("/account/change/profile")
@@ -40,10 +46,6 @@ public class AccountInfoChangeController {
         return "redirect:/";
     }
 
-    @Getter
-    @NoArgsConstructor
-    public static class ChangePasswordDto {
-        private String password;
-        private String passwordCheck;
-    }
 }
+
+
