@@ -1,7 +1,9 @@
 package kiti.buy.pmk.service;
 
-import java.io.IOException;
-
+import kiti.buy.pmk.dto.account.AccountRegisterDto;
+import kiti.buy.pmk.dto.post.PostCreateDto;
+import kiti.buy.pmk.mapper.AccountMapper;
+import kiti.buy.pmk.vo.AccountVO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,11 +12,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import kiti.buy.pmk.dto.account.AccountRegisterDto;
-import kiti.buy.pmk.dto.post.PostCreateDto;
-import kiti.buy.pmk.mapper.AccountMapper;
-import kiti.buy.pmk.vo.AccountVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -45,7 +42,7 @@ public class PostServiceTest {
 		
 		AccountVO account = accountMapper.findByAccountId(accountRegisterDto.getAccountId());
 		
-		PostCreateDto postCreateDto = new PostCreateDto("TEST", "TEST", 1);
+		PostCreateDto postCreateDto = new PostCreateDto("TEST", "TEST", 1,null);
 		
 		int i = postService.postCreate(postCreateDto, account.getAccountSeq());
 		

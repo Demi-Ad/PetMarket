@@ -36,4 +36,8 @@
 		select * from account
 	</select>
 
+	<update id="changeProfile" parameterType="hashmap">
+		update account set account_profile_path = #{profile} where account_id = #{accountId}
+	</update>
+
 </mapper>
