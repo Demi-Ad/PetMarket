@@ -28,7 +28,7 @@
 	<context:component-scan base-package="kiti.buy.pmk.controller" />
 	<context:component-scan base-package="kiti.buy.pmk.advice"/>
 	<context:component-scan base-package="kiti.buy.pmk.config"/>
-	<context:component-scan base-package="kiti.buy.pmk.config.interceoptors"/>
+
 	
 	<beans:bean id="adminLoginInterceptor" class="kiti.buy.pmk.config.interceoptors.AdminLoginInterceptor"/>
 	<beans:bean id="loginInterceptor" class="kiti.buy.pmk.config.interceoptors.LoginInterceptor"/>
@@ -51,6 +51,6 @@
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 
-	</interceptors> 
+	</interceptors>
 	
 </beans:beans>

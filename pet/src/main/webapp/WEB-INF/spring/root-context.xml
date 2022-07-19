@@ -55,4 +55,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<context:property-placeholder location="classpath:private.properties"/>
+
+
 </beans>
