@@ -10,18 +10,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Dashboard</title>
+<title>SB Admin 2 -관리자 페이지</title>
 
 <!-- Custom fonts for this template-->
-<link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
+<link href="/resources/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
-
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+	rel="stylesheet">
 <style type="text/css">/* Chart.js */
 @
 keyframes chartjs-render-animation {
@@ -68,15 +69,17 @@ to {
 }
 
 body {
-    margin: 0;
-    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #858796;
-    text-align: left;
-    background-color: #fff;
-    }
+	margin: 0;
+	font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #858796;
+	text-align: left;
+	background-color: #fff;
+}
 </style>
 
 </head>
@@ -287,7 +290,7 @@ body {
 				<!-- Page Heading -->
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
-					<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+					<h1 class="h3 mb-0 text-gray-800">관리자 페이지</h1>
 					<a href="#"
 						class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 						class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
@@ -304,8 +307,8 @@ body {
 									<div class="col mr-2">
 										<div
 											class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-											Earnings (Monthly)</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+											전체회원수</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">1000명</div>
 									</div>
 									<div class="col-auto">
 										<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -323,8 +326,8 @@ body {
 									<div class="col mr-2">
 										<div
 											class="text-xs font-weight-bold text-success text-uppercase mb-1">
-											Earnings (Annual)</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+											오늘방문자수</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">175명</div>
 									</div>
 									<div class="col-auto">
 										<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -341,16 +344,16 @@ body {
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+											class="text-xs font-weight-bold text-info text-uppercase mb-1">글작성수
 										</div>
 										<div class="row no-gutters align-items-center">
 											<div class="col-auto">
-												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">290개</div>
 											</div>
 											<div class="col">
 												<div class="progress progress-sm mr-2">
 													<div class="progress-bar bg-info" role="progressbar"
-														style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+														style="width: 55%" aria-valuenow="50" aria-valuemin="0"
 														aria-valuemax="100"></div>
 												</div>
 											</div>
@@ -364,37 +367,63 @@ body {
 						</div>
 					</div>
 
-				
-
-				<!-- Content Row -->
-
-				<div class="row">
-
-					
-
-					
-							
-
-				
-
-						
-
-						
-
-				
-
-		<!-- Footer -->
-		<footer class="sticky-footer bg-white">
-			<div class="container my-auto">
-				<div class="copyright text-center my-auto">
-					<span>Copyright Â© Your Website 2021</span>
+					<div class="card shadow mb-4 col-12">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Basic
+								CardExample</h6>
+						</div>
+						<div id="accountResult" class="card-body"></div>
+					</div>
 				</div>
 			</div>
-		</footer>
-		<!-- End of Footer -->
 
+
+
+			<!-- Content Row -->
+
+			<div class="row">
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright Â© Your Website 2021</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
+
+			</div>
+
+		</div>
 	</div>
-	
-	
+	<script type="text/javascript"
+		src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+	<script>
+
+	new gridjs.Grid({
+		columns : [ "아이디", "이메일",{ 
+	        name: '탈퇴',
+	        formatter: (cell) => gridjs.html("<a href=/admin/delete/" + cell + ">삭제</a>")
+	      },],
+	      server: {
+		    url: '/admin/accountList',
+		    then: data => data.map(account => 
+		      [account.accountId, account.accountEmail, account.accountSeq]
+		    )
+		  },
+		search: {
+			enabled: true
+		},
+		 pagination: {
+			    enabled: true,
+			    limit: 3,
+			    summary: false
+	}
+	}).render(document.getElementById("accountResult"));
+		
+		
+		
+	</script>
 </body>
 </html>
