@@ -52,6 +52,7 @@
 		
 		<interceptor>
 			<mapping path="/post/**"/>
+			<exclude-mapping path="/post/category/**"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 
