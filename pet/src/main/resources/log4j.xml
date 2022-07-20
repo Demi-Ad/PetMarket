@@ -34,7 +34,7 @@
 		<level value="info" />
 	</logger>
 
-	<logger name="jdbc.audit">
+	<!--<logger name="jdbc.audit">
 		<level value="warn" />
 	</logger>
 
@@ -46,6 +46,9 @@
 		<level value="warn" />
 	</logger>
 
+	<logger name="jdbc.resultsettable">
+		<level value="off"/>
+	</logger>-->
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />

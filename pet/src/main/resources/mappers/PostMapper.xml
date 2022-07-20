@@ -11,4 +11,40 @@
 		SELECT * from post
 	</select>
 
+	<select id="listingPage" resultMap="listPost">
+		select p.*, a.account_id, a.account_profile_path
+		from post as p inner join account a on  p.post_author = a.account_seq
+		order by p.post_seq desc
+		limit 10 offset #{pageNum}
+	</select>
+
+	<select id="countAll" resultType="int">
+		select count(*) from post
+	</select>
+
+	<select id="categoryListingPage" resultMap="listPost" parameterType="hashmap">
+		select p.*, a.account_id, a.account_profile_path
+		from post as p
+		inner join account a on  p.post_author = a.account_seq
+		inner join categories c on p.post_category = c.categories_seq
+		where c.categories_seq = #{categorySeq}
+		order by p.post_seq desc
+		limit 10 offset #{pageNum}
+	</select>
+
+	<select id="countAllByCategory" resultType="int">
+		select count(*) from post inner join categories c on c.categories_seq = post.post_category
+		where categories_seq = #{categorySeq}
+	</select>
+
+
+	<resultMap id="listPost" type="kiti.buy.pmk.vo.PostPageVO">
+		<id property="postSeq" column="post_seq"/>
+		<result property="postTitle" column="post_title"/>
+		<result property="postContent" column="post_content"/>
+		<result property="postCreatedDate" column="post_created_date"/>
+		<result property="postImgPath" column="post_img_path"/>
+		<result property="accountId" column="account_id"/>
+		<result property="accountImagePath" column="account_profile_path"/>
+	</resultMap>
 </mapper>
