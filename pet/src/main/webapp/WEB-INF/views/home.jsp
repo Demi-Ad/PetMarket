@@ -11,6 +11,7 @@
 <main class="flex-shrink-0">
 	<div class="container">
 		<c:import url="include/nav.jsp"/>
+		
 		<h1>
 			Hello world!
 		</h1>
