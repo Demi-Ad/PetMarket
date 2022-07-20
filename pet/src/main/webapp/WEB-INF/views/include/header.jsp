@@ -53,7 +53,13 @@
 
 				</div>
 			</c:otherwise>
+			
+			</c:choose>
+			</div>
+			</c:otherwise>
+			
 		</c:choose>
+		
 	</div>
 	
 	<c:if test="note != null">
