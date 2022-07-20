@@ -15,6 +15,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("model",sampleDao.sample());
+		model.addAttribute("note", "공지사항");
 		return "home";
 	}
 }
