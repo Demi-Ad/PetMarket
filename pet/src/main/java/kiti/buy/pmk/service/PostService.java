@@ -33,6 +33,17 @@ public class PostService {
 		
 		return post.getPostSeq();
 		
+		
+		
+	}
+	
+	public void PostDelete(int seq) throws Exception{
+		PostMapper.PostMapperDelete(seq);
+	}
+
+	public static void PostDelte(int seq) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

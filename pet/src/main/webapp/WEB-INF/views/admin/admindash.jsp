@@ -392,9 +392,25 @@ body {
 				
 				
 			</div>
+			<div class="card shadow mb-4 col-12">
+				<div class="card-header py-3">
+					게시글
+				</div>
+
+				<div id="accountResult" class="card-body">
+				
+					</div>
+				  
+				</div>
+			
+			
+				
+				
+			</div>
 		</div>
 	</div>
-
+	
+	
 
 
 
@@ -455,5 +471,6 @@ body {
 	
 	
 	</script>
+	
 </body>
 </html>

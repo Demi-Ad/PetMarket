@@ -47,4 +47,9 @@
 		<result property="accountId" column="account_id"/>
 		<result property="accountImagePath" column="account_profile_path"/>
 	</resultMap>
+	<delete id="PostDelete" parameterType="int">
+	DELETE FROM  Post
+	WHERE post_seq = #(seq)
+	</delete>
+
 </mapper>

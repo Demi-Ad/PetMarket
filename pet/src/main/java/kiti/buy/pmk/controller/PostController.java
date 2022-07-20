@@ -8,8 +8,10 @@ import kiti.buy.pmk.vo.SessionDetail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 @Slf4j
@@ -29,6 +31,8 @@ public class PostController {
 
 		postService.postCreate(dto,sessionDetail.getAccountSeq());
 		return "redirect:/";
+		
+		
 	}
 
 	@GetMapping("/post/category/{categoryName}")
@@ -36,5 +40,12 @@ public class PostController {
 		PaginationWrapper paginationWrapper = postPagingService.pagingPost(pageNum, categoryName);
 		model.addAttribute("pagingData",paginationWrapper);
 		return "home";
+	}
+	
+	@RequestMapping(value="/PostDelete")
+	public String PostDelete(@RequestParam("num")int seq)throws Exception{
+		
+		PostService.PostDelte(seq);
+		return "redirect:PostList";
 	}
 }
