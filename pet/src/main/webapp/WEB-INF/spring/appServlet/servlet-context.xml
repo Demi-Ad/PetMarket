@@ -27,12 +27,16 @@
 
 	<context:component-scan base-package="kiti.buy.pmk.controller" />
 	<context:component-scan base-package="kiti.buy.pmk.advice"/>
-	<context:component-scan base-package="kiti.buy.pmk.config"/>
-
 	
 	<beans:bean id="adminLoginInterceptor" class="kiti.buy.pmk.config.interceoptors.AdminLoginInterceptor"/>
 	<beans:bean id="loginInterceptor" class="kiti.buy.pmk.config.interceoptors.LoginInterceptor"/>
 
+	
+	<beans:bean id="ipCacheService" class="kiti.buy.pmk.service.IPCacheService"/>
+	
+	<beans:bean id="ipInterceptor" class="kiti.buy.pmk.config.interceoptors.IPInterceptor">
+		<beans:constructor-arg ref="ipCacheService" />
+	</beans:bean>
 	
 	<interceptors>
 		<interceptor>
@@ -52,5 +56,14 @@
 		</interceptor>
 
 	</interceptors>
+		
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/admin/**"/>
+			<beans:ref bean="ipInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
+
 	
 </beans:beans>

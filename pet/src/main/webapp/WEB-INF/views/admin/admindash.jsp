@@ -369,8 +369,7 @@ body {
 
 					<div class="card shadow mb-4 col-12">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Basic
-								CardExample</h6>
+							<h6 class="m-0 font-weight-bold text-primary">회원목록</h6>
 						</div>
 						<div id="accountResult" class="card-body"></div>
 					</div>
@@ -378,23 +377,43 @@ body {
 			</div>
 
 
+			<div class="card shadow mb-4 col-12">
+				<div class="card-header py-3">
+					공지사항
+				</div>
 
-			<!-- Content Row -->
-
-			<div class="row">
-				<!-- Footer -->
-				<footer class="sticky-footer bg-white">
-					<div class="container my-auto">
-						<div class="copyright text-center my-auto">
-							<span>Copyright Â© Your Website 2021</span>
-						</div>
+				<div id="accountResult" class="card-body">
+				<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+						<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
 					</div>
-				</footer>
-				<!-- End of Footer -->
-
+				  
+				</div>
+				
+				
 			</div>
-
 		</div>
+	</div>
+
+
+
+
+	<!-- Content Row -->
+
+	<div class="row">
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright Â© Your Website 2021</span>
+				</div>
+			</div>
+		</footer>
+		<!-- End of Footer -->
+
+	</div>
+
+	</div>
 	</div>
 	<script type="text/javascript"
 		src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
@@ -424,6 +443,17 @@ body {
 		
 		
 		
+	</script>
+	
+	<script>
+	&function() {
+		$(".btn btn-outline-secondary").on("click",function(){
+			var res=$(".form-control").val()
+			$("container").val()=res;
+		});
+	});
+	
+	
 	</script>
 </body>
 </html>
