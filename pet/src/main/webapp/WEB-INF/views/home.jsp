@@ -23,7 +23,7 @@
                                 <img src="/resources/upload/<c:out value="${data.postImgPath}"/>" class="card-img-top"
                                      alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title"><c:out value="${data.postTitle}"/></h5>
+                                    <a href="/post/<c:out value="${data.postSeq}"/>" class="card-title fs-4"><c:out value="${data.postTitle}"/></a>
                                     <p class="card-text"><c:out value="${data.postContent}"/></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="mb-0"><c:out value="${data.accountId}"/></p>

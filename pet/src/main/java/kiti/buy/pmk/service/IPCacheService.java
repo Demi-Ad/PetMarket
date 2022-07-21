@@ -1,13 +1,10 @@
 package kiti.buy.pmk.service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedDeque;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-import org.springframework.stereotype.Service;
 
 
 public class IPCacheService {
@@ -23,12 +20,10 @@ public class IPCacheService {
 			
 			@Override
 			public void run() {
-				
 				System.out.println(memoryCache);
 				memoryCache.clear();
-				
 			}
-		}, 1000 * 60, 10000);
+		}, 1000 * 60, 1000 * 60 * 60 * 24);
 	}
 	
 	@PreDestroy
@@ -36,7 +31,7 @@ public class IPCacheService {
 		this.timer.purge();
 	}
 	
-	public boolean isCacheing(String ip) {
+	public boolean isCaching(String ip) {
 		return memoryCache.contains(ip);
 	}
 	
