@@ -1,5 +1,6 @@
 package kiti.buy.pmk.mapper;
 
+import kiti.buy.pmk.dto.admin.AdminPostListDTO;
 import kiti.buy.pmk.vo.PostPageVO;
 import kiti.buy.pmk.vo.PostVO;
 
@@ -18,4 +19,8 @@ public interface PostMapper {
 	List<PostPageVO> categoryListingPage(HashMap<String,Integer> param);
 
 	int countAllByCategory(int categorySeq);
+
+	void postDelete(int seq);
+
+	List<AdminPostListDTO> adminPostList();
 }

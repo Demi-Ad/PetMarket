@@ -37,13 +37,4 @@ public class PostService {
 		
 	}
 	
-	public void PostDelete(int seq) throws Exception{
-		PostMapper.PostMapperDelete(seq);
-	}
-
-	public static void PostDelte(int seq) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

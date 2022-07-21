@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kiti.buy.pmk.dao.AdminMemberDAO;
 import kiti.buy.pmk.dto.admin.AdminLoginDTO;
+import kiti.buy.pmk.dto.admin.AdminPostListDTO;
 import kiti.buy.pmk.mapper.AdminMapper;
+import kiti.buy.pmk.mapper.PostMapper;
 import kiti.buy.pmk.vo.AccountVO;
 import kiti.buy.pmk.vo.AdminVO;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class AdminService {
 	
 	private final AdminMapper adminMapper;
 	private final AdminMemberDAO AdminMemberDAO;
+	private final PostMapper postMapper;
 	
 	
 	public AdminVO login(AdminLoginDTO dto) {
@@ -36,6 +39,17 @@ public class AdminService {
 	public List<AccountVO> findAllAccount() {
 		return AdminMemberDAO.findAll();
 	}
+	
+	public void postDelete(int seq){
+		postMapper.postDelete(seq);
+	}
+	
+	public List<AdminPostListDTO> postList() {
+		return postMapper.adminPostList();
+	}
+
+
+	
 }
 
 
