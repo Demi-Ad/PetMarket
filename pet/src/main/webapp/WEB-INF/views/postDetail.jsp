@@ -44,7 +44,10 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <button type="button" class="btn btn-outline-success">쪽지</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#noteModal" class="btn btn-outline-success">쪽지</button>
+                            <c:import url="include/note.jsp">
+                                <c:param name="recipient" value="${detail.postAuthorId}"/>
+                            </c:import>
                         </c:otherwise>
                     </c:choose>
 

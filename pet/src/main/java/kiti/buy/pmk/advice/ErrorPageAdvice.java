@@ -24,7 +24,7 @@ public class ErrorPageAdvice {
 		ModelAndView mv =  new ModelAndView("error/error400");
 		mv.addObject("error", message);
 		mv.setStatus(HttpStatus.BAD_REQUEST);
-		log.error("error = {}",message);
+		log.error("exception = {} error = {}",e.getClass(),message);
 		return mv;
 	}
 
