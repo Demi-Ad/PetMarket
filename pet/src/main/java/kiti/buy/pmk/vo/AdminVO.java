@@ -18,4 +18,5 @@ public class AdminVO {
 		this.adminId = adminId;
 		this.adminPassword = adminPassword;
 	}
+
 }

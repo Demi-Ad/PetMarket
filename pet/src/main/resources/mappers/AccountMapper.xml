@@ -40,8 +40,6 @@
 		update account set account_profile_path = #{profile} where account_id = #{accountId}
 	</update>
 	
-	<insert id="note_btn" parameterType="String" >
-	INS
-	</insert>
+	
 
 </mapper>

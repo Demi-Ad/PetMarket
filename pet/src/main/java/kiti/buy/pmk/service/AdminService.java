@@ -50,7 +50,7 @@ public class AdminService {
 		return postMapper.adminPostList();
 	}
 	
-	public void adminNoteCreate (String text) {
+	public void adminNoteCreate (String data) {
 		AdminNoteMapper.adminNoteCreate();
 	}
 

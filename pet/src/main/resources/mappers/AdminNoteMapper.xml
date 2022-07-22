@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Insert id="adminNotemessage" resultType="String">
+INSERT INTO adminNote data values#({String})
+</Insert>
