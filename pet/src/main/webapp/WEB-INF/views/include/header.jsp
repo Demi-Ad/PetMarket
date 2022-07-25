@@ -36,7 +36,7 @@
     </div>
 
     <c:if test="${note != null}">
-        <div class="container">
+        <div class="container p-0">
             <div class="alert alert-danger" role="alert">
                 <c:out value="${note}"/>
             </div>

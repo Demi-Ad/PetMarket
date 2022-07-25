@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Insert id="adminNotemessage" resultType="String">
-INSERT INTO adminNote data values#({String})
-</Insert>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kiti.buy.pmk.mapper.AdminNoteMapper">
+<insert id="adminNotemessage">
+	INSERT INTO admin_note(data) values(#{data})
+</insert>
+
+<select id="showNote" resultType="kiti.buy.pmk.vo.AdminNoteVO">
+select * from admin_note where admin_note_seq = (select max(admin_note_seq) from admin_note)
+</select>
+
+</mapper>

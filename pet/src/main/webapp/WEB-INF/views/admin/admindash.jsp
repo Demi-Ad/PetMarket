@@ -383,10 +383,10 @@ body {
 					</div>
 				<div id="PostTextResult" class="card-body">
 					<div class="input-group m-3">
-						<input type="text" class="form-control" placeholder=""
+						<input type="text" class="form-control" id="adminNoteText"
 							aria-label="Username" aria-describedby="basic-addon1">
 						<button class="btn btn-outline-secondary" type="button"
-							id="button-addon2">전송하기</button>
+							id="adminNoteBtn">전송하기</button>
 					</div>
 
 				</div>
@@ -467,25 +467,27 @@ body {
 	}
 	}).render(document.getElementById("postResult"));
 	
-	document.querySelector("#note_btn").addEventListener("click", (e) => {
-		const text = document.querySelector("#note_text").value;
+	document.querySelector("#adminNoteBtn").addEventListener("click", (e) => {
+		const text = document.querySelector("#adminNoteText").value;
 		fetch("/admin/note", {
 			method: "POST",
 			headers : {
 				"Content-Type" : "application/json"
 			},
-			body: {text}
+			 body : JSON.stringify({text})
 		}).then(async res => {
 			if (res.status === 200) {
-				alert("공지사항 작성 완료")
+				alert("공지사항 작성 완료");
 			} else {
 				const err = await res.json();
-				throw new Error(err.reason)
+				throw new Error(err.reason);
 			}
 		}).catch(e => {
 			alert(e)
 		})
 	})
+	
+	
 	</script>
 
 </body>

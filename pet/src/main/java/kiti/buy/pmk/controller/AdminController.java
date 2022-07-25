@@ -93,6 +93,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/note")
+	@ResponseBody
 	public HttpEntity<?> adminNoteCreate(@RequestBody Map<String,Object> data) {
 		String text = (String) data.get("text");
 		adminService.adminNoteCreate(text);
