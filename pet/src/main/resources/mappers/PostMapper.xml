@@ -18,6 +18,14 @@
 		limit 10 offset #{pageNum}
 	</select>
 
+	<select id="searchListingPage" resultMap="listPost" parameterType="kiti.buy.pmk.dto.post.PostSearchCriteria">
+		select p.*, a.account_id, a.account_profile_path
+		from post as p inner join account a on  p.post_author = a.account_seq
+		where post_title like CONCAT('%', #{keyword}, '%') or post_content like CONCAT('%', #{keyword}, '%')
+		order by p.post_seq desc
+		limit 10 offset #{pageNum}
+	</select>
+
 	<select id="countAll" resultType="int">
 		select count(*) from post
 	</select>
@@ -75,7 +83,7 @@
 	</select>
 
 	<select id="findByPostSeq" resultType="kiti.buy.pmk.vo.PostVO">
-		select * from post;
+		select * from post where post_seq = #{postSeq};
 	</select>
 
 	<update id="updatePost" parameterType="kiti.buy.pmk.vo.PostVO">
@@ -86,5 +94,6 @@
 	<update id="postHitCountUp" parameterType="hashmap">
 		update post set post_hit = #{postHit} where post_seq = #{postSeq}
 	</update>
+
 
 </mapper>

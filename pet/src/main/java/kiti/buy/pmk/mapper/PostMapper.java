@@ -2,6 +2,7 @@ package kiti.buy.pmk.mapper;
 
 import kiti.buy.pmk.dto.admin.AdminPostListDTO;
 import kiti.buy.pmk.dto.post.PostDetailDTO;
+import kiti.buy.pmk.dto.post.PostSearchCriteria;
 import kiti.buy.pmk.vo.PostPageVO;
 import kiti.buy.pmk.vo.PostVO;
 
@@ -32,4 +33,6 @@ public interface PostMapper {
 	void updatePost(PostVO postVO);
 
 	void postHitCountUp(HashMap<String,Integer> param);
+
+	List<PostPageVO> searchListingPage(PostSearchCriteria postSearchCriteria);
 }

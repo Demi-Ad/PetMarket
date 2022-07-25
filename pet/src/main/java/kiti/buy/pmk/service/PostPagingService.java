@@ -1,6 +1,7 @@
 package kiti.buy.pmk.service;
 
 import kiti.buy.pmk.dto.post.PaginationWrapper;
+import kiti.buy.pmk.dto.post.PostSearchCriteria;
 import kiti.buy.pmk.mapper.PostMapper;
 import kiti.buy.pmk.vo.PostPageVO;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,9 @@ public class PostPagingService {
 
     public PaginationWrapper pagingPost(int pageNum) {
         int countAll = postMapper.countAll();
-        List<PostPageVO> postList = postMapper.listingPage(calculationLoadPage(pageNum));
+        int calcPage = calculationLoadPage(pageNum);
+
+        List<PostPageVO> postList = postMapper.listingPage(calcPage);
 
         return PaginationWrapper.builder()
                 .data(postList)
@@ -40,6 +43,19 @@ public class PostPagingService {
                 .data(postList)
                 .currentPage(pageNum)
                 .totalCount(categoryCount)
+                .build();
+    }
+
+    public PaginationWrapper searchPagingPost(PostSearchCriteria postSearchCriteria) {
+        int currentPageNum = postSearchCriteria.getPageNum();
+        int i = calculationLoadPage(currentPageNum);
+        int countAll = postMapper.countAll();
+        postSearchCriteria.setPageNum(i);
+        List<PostPageVO> postList = postMapper.searchListingPage(postSearchCriteria);
+        return PaginationWrapper.builder()
+                .data(postList)
+                .currentPage(currentPageNum)
+                .totalCount(countAll)
                 .build();
     }
 
