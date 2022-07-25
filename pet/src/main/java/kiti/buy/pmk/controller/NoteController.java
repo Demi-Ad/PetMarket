@@ -35,6 +35,13 @@ public class NoteController {
         }
     }
 
+    @PostMapping("/noteDelete")
+    public HttpEntity<?> deleteNote(@RequestBody Map<String,Object> bodyMap, @SessionAttribute SessionDetail sessionDetail) {
+        int id = Integer.parseInt((String) bodyMap.get("id"));
+        noteService.deleteNote(id,sessionDetail.getAccountSeq());
+        return ResponseEntity.ok().build();
+    }
+
 
     @ExceptionHandler(ResponseStatusException.class)
     public HttpEntity<?> exceptionHandler(ResponseStatusException e) {

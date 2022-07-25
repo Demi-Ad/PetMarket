@@ -22,7 +22,7 @@
                     <a class="btn btn-outline-info" href="<c:url value="/logout"/>">logout</a>
                     <a class="m-0 ms-3 me-3 btn btn-outline-success" href="<c:url value="/account/change"/>"><c:out value="${sessionScope.sessionDetail.accountId}"/></a>
 
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">쪽지</button>
+                    <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">쪽지</button>
 
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                         <div class="offcanvas-header">
@@ -59,14 +59,34 @@
 </header>
 
 <script>
+    function noteDelete(e) {
+        const { id } = e.dataset;
+        fetch("/noteDelete", {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({id})
+        }).then(async res => {
+            if (res.status === 200) {
+                e.parentNode.parentNode.remove()
+            } else {
+                const {reason} = await res.json()
+                throw new Error(reason)
+            }
+        }).catch(e => {
+            alert(e)
+        })
+    }
+
     function drawData(noteList) {
         return noteList.map(data => {
-            const {noteTitle, noteContent, senderId} = data
+            const {noteSeq, noteTitle, noteContent, senderId} = data
             return `
             <div class="card mb-3">
                 <div class="card-header d-flex justify-content-between">
                     <p class="mb-0">\${senderId}</p>
-                    <button type="button" class="btn-close text-reset" aria-label="Close"></button>
+                    <button type="button" onClick="noteDelete(this)" data-id="\${noteSeq}" class="btn-close text-reset" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">\${noteTitle}</h5>

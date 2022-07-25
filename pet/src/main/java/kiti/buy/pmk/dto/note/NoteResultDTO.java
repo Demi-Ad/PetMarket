@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class NoteResultDTO implements Serializable {
+    private int noteSeq;
     private String noteTitle;
     private String noteContent;
     private String senderId;

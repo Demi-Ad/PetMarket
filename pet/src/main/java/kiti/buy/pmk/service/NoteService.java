@@ -44,4 +44,12 @@ public class NoteService {
 	public List<NoteResultDTO> findAllSendNote(int seq) {
 		return notemapper.findAllNote(seq);
 	}
+
+	public void deleteNote(int noteSeq, int accountSeq) {
+		if (notemapper.findBySeq(noteSeq).getNoteRecipient() == accountSeq) {
+			notemapper.deleteNote(noteSeq);
+		} else {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "잘못된 접근입니다");
+		}
+	}
 }

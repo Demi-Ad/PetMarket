@@ -11,4 +11,8 @@ public interface NoteMapper {
 	void writeNote(NoteVO note);
 
 	List<NoteResultDTO> findAllNote(int accountSeq);
+
+	NoteVO findBySeq(int noteSeq);
+
+	void deleteNote(int noteSeq);
 }
