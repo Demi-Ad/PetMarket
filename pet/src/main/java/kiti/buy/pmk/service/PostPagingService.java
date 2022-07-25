@@ -36,7 +36,7 @@ public class PostPagingService {
         int categoryCount = postMapper.countAllByCategory(categorySeq);
         HashMap<String,Integer> param = new HashMap<>();
         param.put("categorySeq",categorySeq);
-        param.put("pageNum",pageNum);
+        param.put("pageNum",calculationLoadPage(pageNum));
         List<PostPageVO> postList = postMapper.categoryListingPage(param);
 
         return PaginationWrapper.builder()
