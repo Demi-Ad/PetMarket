@@ -1,6 +1,8 @@
 package kiti.buy.pmk.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +10,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,6 +90,14 @@ public class AdminController {
 	public HttpEntity<?> postList() {
 		List<AdminPostListDTO> postList = adminService.postList();
 		return ResponseEntity.ok(postList);
+	}
+	
+	@PostMapping("/admin/note")
+	@ResponseBody
+	public HttpEntity<?> adminNoteCreate(@RequestBody Map<String,Object> data) {
+		String text = (String) data.get("text");
+		adminService.adminNoteCreate(text);
+		return ResponseEntity.ok().build();
 	}
 	
 }

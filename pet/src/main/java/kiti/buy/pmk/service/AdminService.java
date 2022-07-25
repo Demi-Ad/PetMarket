@@ -13,8 +13,10 @@ import kiti.buy.pmk.dao.AdminMemberDAO;
 import kiti.buy.pmk.dto.admin.AdminLoginDTO;
 import kiti.buy.pmk.dto.admin.AdminPostListDTO;
 import kiti.buy.pmk.mapper.AdminMapper;
+import kiti.buy.pmk.mapper.AdminNoteMapper;
 import kiti.buy.pmk.mapper.PostMapper;
 import kiti.buy.pmk.vo.AccountVO;
+import kiti.buy.pmk.vo.AdminNoteVO;
 import kiti.buy.pmk.vo.AdminVO;
 import lombok.RequiredArgsConstructor;
 
@@ -23,9 +25,11 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class AdminService {
 	
+	private static final String AdminNoteVO = null;
 	private final AdminMapper adminMapper;
 	private final AdminMemberDAO AdminMemberDAO;
 	private final PostMapper postMapper;
+	private final AdminNoteMapper adminNoteMapper;
 	
 	
 	public AdminVO login(AdminLoginDTO dto) {
@@ -47,7 +51,17 @@ public class AdminService {
 	public List<AdminPostListDTO> postList() {
 		return postMapper.adminPostList();
 	}
-
+	
+	public void adminNoteCreate (String data) {
+		adminNoteMapper.adminNotemessage(data);
+	
+	}
+	
+	public String showNote() {
+		return adminNoteMapper.showNote().getData();
+		
+		
+	}
 
 	
 }
