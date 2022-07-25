@@ -1,17 +1,23 @@
 package kiti.buy.pmk.service;
 
-import org.springframework.stereotype.Service;
-
 import kiti.buy.pmk.dto.note.NoteCreateDTO;
+import kiti.buy.pmk.dto.note.NoteResultDTO;
 import kiti.buy.pmk.mapper.AccountMapper;
 import kiti.buy.pmk.mapper.NoteMapper;
 import kiti.buy.pmk.vo.AccountVO;
 import kiti.buy.pmk.vo.NoteVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 @Slf4j
 public class NoteService {
 	private final NoteMapper notemapper;
@@ -22,7 +28,7 @@ public class NoteService {
 		
 		if (recipientAccount == null) {
 			log.info("error = {}", senderSeq);
-			return;
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다");
 		}
 		
 		NoteVO note = NoteVO.builder()
@@ -33,5 +39,17 @@ public class NoteService {
 		.build();
 		
 		notemapper.writeNote(note);
+	}
+
+	public List<NoteResultDTO> findAllSendNote(int seq) {
+		return notemapper.findAllNote(seq);
+	}
+
+	public void deleteNote(int noteSeq, int accountSeq) {
+		if (notemapper.findBySeq(noteSeq).getNoteRecipient() == accountSeq) {
+			notemapper.deleteNote(noteSeq);
+		} else {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "잘못된 접근입니다");
+		}
 	}
 }

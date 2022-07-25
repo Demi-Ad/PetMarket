@@ -21,6 +21,19 @@
                 <div class="d-flex">
                     <a class="btn btn-outline-info" href="<c:url value="/logout"/>">logout</a>
                     <a class="m-0 ms-3 me-3 btn btn-outline-success" href="<c:url value="/account/change"/>"><c:out value="${sessionScope.sessionDetail.accountId}"/></a>
+
+                    <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">쪽지</button>
+
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <h5 id="offcanvasRightLabel">쪽지</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body" id="noteBody">
+                            ...
+                        </div>
+                    </div>
+
                     <c:choose>
                         <c:when test="${sessionScope.sessionDetail.profilePath != null}">
                             <img src="/resources/upload/<c:out value="${sessionScope.sessionDetail.profilePath}"/>" alt="img" style="border-radius: 50%; width: 40px; height: 38px" >
@@ -44,3 +57,52 @@
     </c:if>
 
 </header>
+
+<script>
+    function noteDelete(e) {
+        const { id } = e.dataset;
+        fetch("/noteDelete", {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({id})
+        }).then(async res => {
+            if (res.status === 200) {
+                e.parentNode.parentNode.remove()
+            } else {
+                const {reason} = await res.json()
+                throw new Error(reason)
+            }
+        }).catch(e => {
+            alert(e)
+        })
+    }
+
+    function drawData(noteList) {
+        return noteList.map(data => {
+            const {noteSeq, noteTitle, noteContent, senderId} = data
+            return `
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between">
+                    <p class="mb-0">\${senderId}</p>
+                    <button type="button" onClick="noteDelete(this)" data-id="\${noteSeq}" class="btn-close text-reset" aria-label="Close"></button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">\${noteTitle}</h5>
+                    <p class="card-text">\${noteContent}</p>
+                </div>
+            </div>
+        `
+        }).join("")
+    }
+
+    document.querySelector("#offcanvasRight").addEventListener("show.bs.offcanvas", e => {
+            fetch("/noteShow?accountSeq=<c:out value="${sessionScope.sessionDetail.accountSeq}"/>").then(async res => {
+                if (res.status === 200) {
+                    const data = await res.json()
+                    document.querySelector("#noteBody").innerHTML = drawData(data)
+                }
+            })
+        })
+</script>

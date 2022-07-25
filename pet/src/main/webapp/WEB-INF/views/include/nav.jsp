@@ -21,8 +21,8 @@
                     <a class="nav-link" href="<c:url value="/post/category/default"/>">기타</a>
                 </li>
             </ul>
-            <form class="d-flex mb-0">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex mb-0" action="<c:url value="/search"/>" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" value="${param.search != null ? param.search : ''}">
                     <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
         </div>
