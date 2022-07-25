@@ -22,10 +22,13 @@
             </div>
 
             <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Log in</button>
-            <a href="<c:url value="/register"/>" class="w-100 btn btn-lg btn-info" type="submit">Sign in</a>
+            <a href="<c:url value="/register"/>" class="w-100 btn btn-lg btn-info mb-3" type="submit">Sign in</a>
+            <a href="/forgot">아이디 · 비밀번호 찾기</a>
         </form>
     </div>
+
 </main>
 <c:import url="include/footer.jsp"/>
+<script src="<c:url value="/resources/js/login.js"/>"></script>
 </body>
 </html>

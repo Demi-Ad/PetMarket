@@ -18,10 +18,11 @@ public class PostVO {
 	private int postHit;
 	private int postCategory;
 	private int postAuthor;
+	private String postImgPath;
 	
 	
 	@Builder
-	public PostVO(String postTitle, String postContent, int postCategory, int postAuthor) {
+	public PostVO(String postTitle, String postContent, int postCategory, int postAuthor, String postImgPath) {
 		
 		this.postTitle = postTitle;
 		this.postContent = postContent;
@@ -29,6 +30,7 @@ public class PostVO {
 		this.postCategory = postCategory;
 		this.postAuthor = postAuthor;
 		this.postHit = 0;
+		this.postImgPath = postImgPath;
 	}
 	
 }

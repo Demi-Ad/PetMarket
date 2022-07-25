@@ -1,21 +1,22 @@
 package kiti.buy.pmk;
 
+import kiti.buy.pmk.component.EncryptPasswordComponent;
+import kiti.buy.pmk.dao.SampleDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import kiti.buy.pmk.component.EncryptPasswordComponent;
-import kiti.buy.pmk.dao.SampleDao;
 
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Transactional
+@WebAppConfiguration
 public class ContextTest {
 	
 	@Autowired

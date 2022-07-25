@@ -1,18 +1,20 @@
 package kiti.buy.pmk.mapper;
 
+import kiti.buy.pmk.dto.post.PostDetailDTO;
+import kiti.buy.pmk.vo.AccountVO;
+import kiti.buy.pmk.vo.PostVO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import kiti.buy.pmk.vo.AccountVO;
-import kiti.buy.pmk.vo.PostVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@WebAppConfiguration
 @Transactional
 public class PostMapperTest {
 	
@@ -45,6 +47,12 @@ public class PostMapperTest {
 		postMapper.writePost(post);
 		Assert.assertNotEquals(post.getPostSeq(), 0);
 		
+	}
+
+	@Test
+	public void postDetailTest() {
+		PostDetailDTO postDetailDTO = postMapper.postDetail(5);
+		System.out.println(postDetailDTO);
 	}
 
 }

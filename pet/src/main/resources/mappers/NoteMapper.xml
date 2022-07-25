@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kiti.buy.pmk.mapper.NoteMapper">
+	<insert id="writeNote" parameterType="kiti.buy.pmk.vo.NoteVO" useGeneratedKeys="true" keyProperty="noteSeq">
+	INSERT INTO note(note_sender, note_recipient, note_title, note_content)
+	values (#{noteSender},#{noteRecipient},#{noteTitle}, #{noteContent})
+	</insert>
+
+	<select id="findAllNote" resultType="kiti.buy.pmk.dto.note.NoteResultDTO">
+		select note.note_seq, note.note_title,note.note_content, a.account_id as sender_id from note inner join account a on note.note_sender = a.account_seq
+		where note_recipient = #{accountSeq}
+	</select>
+
+	<select id="findBySeq" resultType="kiti.buy.pmk.vo.NoteVO">
+		select *
+		from note
+		where note_seq = #{noteSeq}
+	</select>
+
+	<delete id="deleteNote">
+		delete from note where note_seq = #{noteSeq}
+	</delete>
+
+</mapper>

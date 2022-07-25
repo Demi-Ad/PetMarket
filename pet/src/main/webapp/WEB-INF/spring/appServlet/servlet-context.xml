@@ -14,8 +14,8 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/profile/**" location="/resources/upload/profile/"/>
-
+	<resources mapping="/profile/**" location="/resources/upload/"/>
+	<resources mapping="/favicon.ico" location="/resources/favicon.ico"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -28,6 +28,44 @@
 
 	<context:component-scan base-package="kiti.buy.pmk.controller" />
 	<context:component-scan base-package="kiti.buy.pmk.advice"/>
-	<context:component-scan base-package="kiti.buy.pmk.config"/>
+	
+	<beans:bean id="adminLoginInterceptor" class="kiti.buy.pmk.config.interceoptors.AdminLoginInterceptor"/>
+	<beans:bean id="loginInterceptor" class="kiti.buy.pmk.config.interceoptors.LoginInterceptor"/>
+
+	
+	<beans:bean id="ipCacheService" class="kiti.buy.pmk.service.IPCacheService"/>
+	
+	<beans:bean id="ipInterceptor" class="kiti.buy.pmk.config.interceoptors.IPInterceptor">
+		<beans:constructor-arg ref="ipCacheService" />
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<exclude-mapping path="/admin/login"/>
+			<beans:ref bean="adminLoginInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/account/change/**"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/post/**"/>
+			<exclude-mapping path="/post/category/**"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+
+		
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/admin/**"/>
+			<beans:ref bean="ipInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
+
+
 	
 </beans:beans>
