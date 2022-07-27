@@ -367,7 +367,7 @@ body {
 						</div>
 					</div>
 
-					<div class="card shadow mb-4 col-12">
+					<div class="card shadow  mb-4 col-12 ">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">회원목록</h6>
 						</div>
@@ -377,25 +377,29 @@ body {
 			</div>
 
 
-			<div class="card shadow mb-4 col-12">
-				<div class="card-header py-3">
-					공지사항
+			<div class="card shadow  mb-4 col-12">
+				<div class="card-header  py-3">
+					<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+					</div>
+				<div id="PostTextResult" class="card-body">
+					<div class="input-group m-3">
+						<input type="text" class="form-control" id="adminNoteText"
+							aria-label="Username" aria-describedby="basic-addon1">
+						<button class="btn btn-outline-secondary" type="button"
+							id="adminNoteBtn">전송하기</button>
+					</div>
+
 				</div>
 
-				<div id="accountResult" class="card-body">
-				<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-						<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-					</div>
-				  
-				</div>
-				
-				
+
+			</div>
+			<div class="card shadow mb-4 col-12">
+				<div class="card-header py-3">게시글</div>
+
+				<div id="postResult" class="card-body"></div>
 			</div>
 		</div>
 	</div>
-
-
 
 
 	<!-- Content Row -->
@@ -436,24 +440,55 @@ body {
 		},
 		 pagination: {
 			    enabled: true,
-			    limit: 3,
-			    summary: false
+			    limit: 5,
+			    summary: true
 	}
 	}).render(document.getElementById("accountResult"));
-		
-		
-		
+	
+	
+	new gridjs.Grid({
+		columns : [ "게시글 번호", "게시글 제목","작성자",{ 
+	        name: '삭제',
+	        formatter: (_, row) => gridjs.html("<a href=/admin/postDelete/" + row.cells[0].data + ">삭제</a>")
+	      },],
+	      server: {
+		    url: '/admin/postList',
+		    then: data => data.map(post => 
+		      [post.postSeq, post.postTitle, post.postAuthor]
+		    )
+		  },
+		search: {
+			enabled: true
+		},
+		 pagination: {
+			    enabled: true,
+			    limit: 15,
+			    summary: true
+	}
+	}).render(document.getElementById("postResult"));
+	
+	document.querySelector("#adminNoteBtn").addEventListener("click", (e) => {
+		const text = document.querySelector("#adminNoteText").value;
+		fetch("/admin/note", {
+			method: "POST",
+			headers : {
+				"Content-Type" : "application/json"
+			},
+			 body : JSON.stringify({text})
+		}).then(async res => {
+			if (res.status === 200) {
+				alert("공지사항 작성 완료");
+			} else {
+				const err = await res.json();
+				throw new Error(err.reason);
+			}
+		}).catch(e => {
+			alert(e)
+		})
+	})
+	
+	
 	</script>
-	
-	<script>
-	&function() {
-		$(".btn btn-outline-secondary").on("click",function(){
-			var res=$(".form-control").val()
-			$("container").val()=res;
-		});
-	});
-	
-	
-	</script>
+
 </body>
 </html>

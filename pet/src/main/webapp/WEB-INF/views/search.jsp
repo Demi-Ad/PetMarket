@@ -10,12 +10,9 @@
 
 <main class="flex-shrink-0">
     <div class="container">
-        <c:import url="include/nav.jsp"/>
-        <c:if test="${sessionScope.sessionDetail ne null}">
-            <div class="d-flex flex-row-reverse mt-4">
-                <a class="btn btn-outline-primary" href="/post/create">글쓰기</a>
-            </div>
-        </c:if>
+        <c:import url="include/nav.jsp">
+            <c:param name="search" value="${keyword}"/>
+        </c:import>
 
         <c:choose>
             <c:when test="${pagingData.data.size() eq 0}">
@@ -51,17 +48,17 @@
                 <nav class="mt-5 d-flex justify-content-center ">
                     <ul class="pagination">
                         <li class="page-item <c:out value="${pagingData.firstPage ? 'disabled' : ''}"/>">
-                            <a class="page-link" href="?pageNum=<c:out value="${pagingData.currentPage - 1}"/>"> < </a>
+                            <a class="page-link" href="?pageNum=${pagingData.currentPage - 1}&keyword=${keyword}"> < </a>
                         </li>
 
                         <c:forEach begin="${pagingData.currentStartPage}" end="${pagingData.currentLastPage}" var="i">
                             <li class="page-item <c:if test="${i eq pagingData.currentPage}">active</c:if>">
-                                <a class="page-link" href="?pageNum=<c:out value="${i}"/>"><c:out value="${i}"/></a>
+                                <a class="page-link" href="?pageNum=${i}&keyword=${keyword}"><c:out value="${i}"/></a>
                             </li>
                         </c:forEach>
 
                         <li class="page-item <c:out value="${pagingData.lastPage ? 'disabled' : ''}"/>">
-                            <a class="page-link" href="?pageNum=<c:out value="${pagingData.currentPage +1}"/>">></a>
+                            <a class="page-link" href="?pageNum=${pagingData.currentPage +1}&keyword=${keyword}">></a>
                         </li>
                     </ul>
                 </nav>

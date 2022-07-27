@@ -6,5 +6,20 @@
 	INSERT INTO note(note_sender, note_recipient, note_title, note_content)
 	values (#{noteSender},#{noteRecipient},#{noteTitle}, #{noteContent})
 	</insert>
-	
+
+	<select id="findAllNote" resultType="kiti.buy.pmk.dto.note.NoteResultDTO">
+		select note.note_seq, note.note_title,note.note_content, a.account_id as sender_id from note inner join account a on note.note_sender = a.account_seq
+		where note_recipient = #{accountSeq}
+	</select>
+
+	<select id="findBySeq" resultType="kiti.buy.pmk.vo.NoteVO">
+		select *
+		from note
+		where note_seq = #{noteSeq}
+	</select>
+
+	<delete id="deleteNote">
+		delete from note where note_seq = #{noteSeq}
+	</delete>
+
 </mapper>
